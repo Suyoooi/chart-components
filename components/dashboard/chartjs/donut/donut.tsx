@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect } from "react";
 import { Chart, registerables } from "chart.js";
 
@@ -37,8 +36,9 @@ const Donut: React.FC<DoughnutChartProps> = ({ data, labels }) => {
             ],
           },
           options: {
+            cutoutPercentage: 50,
             animation: false,
-          },
+          } as any,
         }
       );
     }
