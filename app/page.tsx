@@ -8,14 +8,15 @@ import MultiLine from "@/components/dashboard/chartjs/line/multiLine";
 
 export default function Home() {
   const labels = ["Label 1", "Label 2", "Label 3", "Label 4", "Label 5"];
-  const barChartData = [15, 25, 18, 30, 22];
-
-  const horizontalBarChartData = [15, 25, 18, 6, 22];
-
   const lineChartData = [10, 20, 15, 25, 18];
-
+  const multiLineChartData = [
+    [10, 20, 15, 25, 18],
+    [15, 25, 18, 30, 22],
+    [8, 18, 12, 20, 15],
+  ];
+  const barChartData = [15, 25, 18, 30, 22];
+  const horizontalBarChartData = [15, 25, 18, -6, 22];
   const doughnutChartData = [30, 20, 10, 25, 15];
-
   const areaChartData = [10, -13, 3, 25, -15];
 
   return (
@@ -26,7 +27,7 @@ export default function Home() {
           <Line data={lineChartData} labels={labels} />
         </div>
         <div>
-          <MultiLine data={lineChartData} labels={labels} />
+          <MultiLine data={multiLineChartData} labels={labels} />
         </div>
         <div>
           <Area data={areaChartData} labels={labels} />
