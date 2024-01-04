@@ -1,19 +1,20 @@
-"use client";
-import { useEffect } from "react";
+"use client"; /* @jsxImportSource react */
+import { useEffect, useRef } from "react";
 import { Chart, registerables } from "chart.js";
 
 Chart.register(...registerables);
 
-interface DoughnutChartProps {
+interface HalfDoughnutChartProps {
   data: number[];
   labels: string[];
 }
 
-const Donut: React.FC<DoughnutChartProps> = ({ data, labels }) => {
+const HalfDonut: React.FC<HalfDoughnutChartProps> = ({ data, labels }) => {
+  const doughnutChartRef = useRef<HTMLCanvasElement | null>(null);
+
   useEffect(() => {
-    const doughnutChartCanvas = document.getElementById(
-      "doughnutChart"
-    ) as HTMLCanvasElement;
+    const doughnutChartCanvas = doughnutChartRef.current;
+
     let doughnutChartInstance: Chart<"doughnut", number[], string> | null =
       null;
 
@@ -32,14 +33,18 @@ const Donut: React.FC<DoughnutChartProps> = ({ data, labels }) => {
               {
                 data: data,
                 backgroundColor: [
-                  "rgb(255,240 ,245)",
-                  "rgb(255,182,193)",
-                  "rgb(255,20,147)",
-                  "rgb(221,160,221)",
-                  "rgb(128,128,221)",
+                  "rgb(240,230 ,140)",
+                  "rgb(210,180,140)",
+                  "rgb(255,140,0)",
+                  "rgb(128,128,0)",
+                  "rgb(107,142,35)",
                 ],
               },
             ],
+          },
+          options: {
+            rotation: -90,
+            circumference: 180,
           },
         }
       );
@@ -52,7 +57,7 @@ const Donut: React.FC<DoughnutChartProps> = ({ data, labels }) => {
     };
   }, [data, labels]);
 
-  return <canvas id="doughnutChart" width="400" height="200"></canvas>;
+  return <canvas ref={doughnutChartRef} width="400" height="200"></canvas>;
 };
 
-export default Donut;
+export default HalfDonut;
