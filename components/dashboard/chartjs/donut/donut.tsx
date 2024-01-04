@@ -1,15 +1,11 @@
 "use client";
 import { useEffect } from "react";
 import { Chart, registerables } from "chart.js";
+import { chartJsProps } from "@/types/chartJs";
 
 Chart.register(...registerables);
 
-interface DoughnutChartProps {
-  data: number[];
-  labels: string[];
-}
-
-const Donut: React.FC<DoughnutChartProps> = ({ data, labels }) => {
+const Donut: React.FC<chartJsProps> = ({ data, labels }) => {
   useEffect(() => {
     const doughnutChartCanvas = document.getElementById(
       "doughnutChart"
@@ -34,9 +30,9 @@ const Donut: React.FC<DoughnutChartProps> = ({ data, labels }) => {
                 backgroundColor: [
                   "rgb(255,240 ,245)",
                   "rgb(255,182,193)",
-                  "rgb(255,20,147)",
+                  "rgb(253, 122, 192)",
                   "rgb(221,160,221)",
-                  "rgb(128,128,221)",
+                  "rgb(180, 159, 219)",
                 ],
               },
             ],

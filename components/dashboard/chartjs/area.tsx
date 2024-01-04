@@ -2,15 +2,11 @@
 
 import { useEffect } from "react";
 import { Chart, registerables } from "chart.js";
+import { chartJsProps } from "@/types/chartJs";
 
 Chart.register(...registerables);
 
-interface AreaChartProps {
-  data: number[];
-  labels: string[];
-}
-
-const Area: React.FC<AreaChartProps> = ({ data, labels }) => {
+const Area: React.FC<chartJsProps> = ({ data, labels }) => {
   useEffect(() => {
     const areaChartCanvas = document.getElementById(
       "areaChart"

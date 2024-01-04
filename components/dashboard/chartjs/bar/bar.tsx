@@ -2,15 +2,11 @@
 
 import { useEffect } from "react";
 import { Chart, registerables } from "chart.js";
+import { chartJsProps } from "@/types/chartJs";
 
 Chart.register(...registerables);
 
-interface BarChartProps {
-  data: number[];
-  labels: string[];
-}
-
-const Bar: React.FC<BarChartProps> = ({ data, labels }) => {
+const Bar: React.FC<chartJsProps> = ({ data, labels }) => {
   useEffect(() => {
     const barChartCanvas = document.getElementById(
       "barChart"
@@ -30,8 +26,8 @@ const Bar: React.FC<BarChartProps> = ({ data, labels }) => {
             {
               label: "Bar Chart",
               data: data,
-              backgroundColor: "green",
-              borderColor: "green",
+              backgroundColor: "rgb(133, 165, 120)",
+              borderColor: "rgb(133, 165, 120)",
               borderWidth: 1,
             },
           ],

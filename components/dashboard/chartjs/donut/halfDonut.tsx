@@ -1,15 +1,11 @@
 "use client"; /* @jsxImportSource react */
 import { useEffect, useRef } from "react";
 import { Chart, registerables } from "chart.js";
+import { chartJsProps } from "@/types/chartJs";
 
 Chart.register(...registerables);
 
-interface HalfDoughnutChartProps {
-  data: number[];
-  labels: string[];
-}
-
-const HalfDonut: React.FC<HalfDoughnutChartProps> = ({ data, labels }) => {
+const HalfDonut: React.FC<chartJsProps> = ({ data, labels }) => {
   const doughnutChartRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -33,11 +29,11 @@ const HalfDonut: React.FC<HalfDoughnutChartProps> = ({ data, labels }) => {
               {
                 data: data,
                 backgroundColor: [
+                  "rgb(243, 233, 205)",
                   "rgb(240,230 ,140)",
                   "rgb(210,180,140)",
-                  "rgb(255,140,0)",
-                  "rgb(128,128,0)",
-                  "rgb(107,142,35)",
+                  "rgb(203, 230, 151)",
+                  "rgb(255, 178, 85)",
                 ],
               },
             ],

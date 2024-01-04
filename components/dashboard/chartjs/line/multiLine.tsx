@@ -1,16 +1,17 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Chart, registerables } from "chart.js";
 import { chartJsProps } from "@/types/chartJs";
 
 Chart.register(...registerables);
 
-const Line: React.FC<chartJsProps> = ({ data, labels }) => {
+const MultiLine: React.FC<chartJsProps> = ({ data, labels }) => {
+  const lineChartRef = useRef<HTMLCanvasElement | null>(null);
+
   useEffect(() => {
-    const lineChartCanvas = document.getElementById(
-      "lineChart"
-    ) as HTMLCanvasElement;
+    const lineChartCanvas = lineChartRef.current;
+
     let lineChartInstance: Chart | null = null;
 
     if (lineChartCanvas) {
@@ -45,4 +46,4 @@ const Line: React.FC<chartJsProps> = ({ data, labels }) => {
   return <canvas id="lineChart" width="400" height="200"></canvas>;
 };
 
-export default Line;
+export default MultiLine;

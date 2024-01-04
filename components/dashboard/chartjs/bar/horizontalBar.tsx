@@ -2,15 +2,11 @@
 
 import { useEffect } from "react";
 import { Chart, registerables } from "chart.js";
+import { chartJsProps } from "@/types/chartJs";
 
 Chart.register(...registerables);
 
-interface HorizontalBarChartProps {
-  data: number[];
-  labels: string[];
-}
-
-const HorizontalBar: React.FC<HorizontalBarChartProps> = ({ data, labels }) => {
+const HorizontalBar: React.FC<chartJsProps> = ({ data, labels }) => {
   useEffect(() => {
     const horizontalBarChartCanvas = document.getElementById(
       "horizontalBarChart"
@@ -30,8 +26,8 @@ const HorizontalBar: React.FC<HorizontalBarChartProps> = ({ data, labels }) => {
             {
               label: "Horizontal Bar Chart",
               data: data,
-              backgroundColor: "purple",
-              borderColor: "purple",
+              backgroundColor: "rgb(221, 160,221)",
+              borderColor: "rgb(221, 160,221)",
               borderWidth: 1,
             },
           ],
