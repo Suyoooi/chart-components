@@ -4,7 +4,7 @@ import { Chart, registerables } from "chart.js";
 
 Chart.register(...registerables);
 
-export interface lineChartJsProps {
+interface lineChartJsProps {
   data: any[];
   labels: string[];
 }
