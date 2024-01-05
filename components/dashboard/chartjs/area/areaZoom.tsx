@@ -101,6 +101,10 @@ const AreaZoom: React.FC<chartJsProps> = ({ data, labels }) => {
     console.log("zoomOut 했습니다::::", zoomLevel);
   };
 
+  useEffect(() => {
+    console.log("zoomLevel 변경:", zoomLevel);
+  }, [zoomLevel]);
+
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
