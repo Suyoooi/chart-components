@@ -12,8 +12,8 @@ const BarChart: React.FC<BarChartProps> = ({ data }) => {
 
   useEffect(() => {
     const margin = { top: 10, right: 30, bottom: 90, left: 40 },
-      width = 460 - margin.left - margin.right,
-      height = 450 - margin.top - margin.bottom;
+      width = 400 - margin.left - margin.right,
+      height = 300 - margin.top - margin.bottom;
 
     // svg 삭제
     d3.select(chartRef.current).selectAll("*").remove();
@@ -41,7 +41,7 @@ const BarChart: React.FC<BarChartProps> = ({ data }) => {
       .attr("transform", "translate(-10,0)rotate(0)")
       .style("text-anchor", "end");
 
-    const y = d3.scaleLinear<number>().domain([0, 13000]).range([height, 0]);
+    const y = d3.scaleLinear<number>().domain([0, 200]).range([height, 0]);
 
     svg.append("g").call(d3.axisLeft(y));
 
@@ -51,7 +51,7 @@ const BarChart: React.FC<BarChartProps> = ({ data }) => {
       .join("rect")
       .attr("x", (d) => x(d.Country) ?? 0)
       .attr("width", x.bandwidth())
-      .attr("fill", "#69b3a2")
+      .attr("fill", "#b3e59b")
       .attr("height", (d) => height - y(0))
       .attr("y", (d) => y(0))
       .transition()

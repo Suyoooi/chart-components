@@ -12,8 +12,8 @@ const HorizontalBarChart: React.FC<BarChartProps> = ({ data }) => {
 
   useEffect(() => {
     const margin = { top: 20, right: 30, bottom: 40, left: 90 };
-    const width = 460 - margin.left - margin.right;
-    const height = 400 - margin.top - margin.bottom;
+    const width = 400 - margin.left - margin.right;
+    const height = 250 - margin.top - margin.bottom;
 
     // svg 삭제
     d3.select(chartRef.current).selectAll("*").remove();
@@ -28,7 +28,7 @@ const HorizontalBarChart: React.FC<BarChartProps> = ({ data }) => {
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
     // X axis
-    const x = d3.scaleLinear().domain([0, 20000]).range([0, width]);
+    const x = d3.scaleLinear().domain([0, 200]).range([0, width]);
     svg
       .append("g")
       .attr("transform", `translate(0,${height})`)
@@ -55,7 +55,7 @@ const HorizontalBarChart: React.FC<BarChartProps> = ({ data }) => {
       .attr("y", (d) => y(d.Country) || 0)
       .attr("width", (d) => x(d.Value) || 0)
       .attr("height", y.bandwidth() || 0)
-      .attr("fill", "#69b3a2");
+      .attr("fill", "rgb(172, 153, 209)");
   }, [data]);
 
   return <div ref={chartRef as React.RefObject<HTMLDivElement>} />;
