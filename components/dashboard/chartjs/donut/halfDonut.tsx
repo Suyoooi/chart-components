@@ -1,4 +1,5 @@
-"use client"; /* @jsxImportSource react */
+"use client";
+
 import { useEffect, useRef } from "react";
 import { Chart, registerables } from "chart.js";
 import { chartJsProps } from "@/types/chartJs";
