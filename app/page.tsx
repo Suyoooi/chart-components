@@ -1,4 +1,5 @@
-import Area from "@/components/dashboard/chartjs/area";
+import Area from "@/components/dashboard/chartjs/area/area";
+import AreaZoom from "@/components/dashboard/chartjs/area/areaZoom";
 import Bar from "@/components/dashboard/chartjs/bar/bar";
 import HorizontalBar from "@/components/dashboard/chartjs/bar/horizontalBar";
 import Donut from "@/components/dashboard/chartjs/donut/donut";
@@ -8,6 +9,7 @@ import GaugeChart1 from "@/components/dashboard/chartjs/gauage/gaugeChart1";
 import GaugeChart from "@/components/dashboard/chartjs/gauage/gaugeChart1";
 import GaugeChart2 from "@/components/dashboard/chartjs/gauage/gaugeChart2";
 import Line from "@/components/dashboard/chartjs/line/line";
+import LineAddData from "@/components/dashboard/chartjs/line/lineAddData";
 import MultiLine from "@/components/dashboard/chartjs/line/multiLine";
 import BarChart from "@/components/dashboard/d3/bar/bar";
 
@@ -16,6 +18,7 @@ import LineChart from "@/components/dashboard/d3/line/line";
 
 export default function Home() {
   const labels = ["Label 1", "Label 2", "Label 3", "Label 4", "Label 5"];
+  const areaZoomLabels = ["A", "B", "C", "D", "E", "F", "G", "H"];
   const gaugeLabels = ["Level.1", "Level.2", "Level.3"];
   const gaugeLabels2 = ["Level.1", "Level.2"];
 
@@ -29,6 +32,7 @@ export default function Home() {
   const horizontalBarChartData = [15, 25, 18, -6, 22];
   const doughnutChartData = [30, 20, 10, 25, 15];
   const areaChartData = [10, -13, 3, 25, -15];
+  const areaZoomChartData = [10, -13, 3, 25, -15, 32, -23, 3];
   const gauageChartData = [200, 400, 700];
   const gauageChartData2 = [700, 200];
 
@@ -57,7 +61,7 @@ export default function Home() {
           <MultiLine data={multiLineChartData} labels={labels} />
         </div>
         <div>
-          <Area data={areaChartData} labels={labels} />
+          <LineAddData data={multiLineChartData} labels={labels} />
         </div>
       </div>
       <div className="flex flex-row mt-12">
@@ -85,6 +89,14 @@ export default function Home() {
         </div>
         <div>
           <HorizontalBar data={horizontalBarChartData} labels={labels} />
+        </div>
+      </div>
+      <div className="flex flex-row mt-12 gap-10">
+        <div>
+          <Area data={areaChartData} labels={labels} />
+        </div>
+        <div>
+          <AreaZoom data={areaZoomChartData} labels={areaZoomLabels} />
         </div>
       </div>
       <div style={{ fontSize: 30, fontWeight: 700 }} className="mb-20 mt-20">
