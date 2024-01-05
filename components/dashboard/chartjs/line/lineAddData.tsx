@@ -72,12 +72,14 @@ const LineAddData: React.FC<lineChartJsProps> = ({ data, labels }) => {
 
   return (
     <div
-      style={{
-        borderWidth: 3,
-        padding: 10,
-        borderColor: "#a5a2a2",
-        borderRadius: 8,
-      }}
+      style={
+        {
+          // borderWidth: 3,
+          // padding: 10,
+          // borderColor: "#a5a2a2",
+          // borderRadius: 8,
+        }
+      }
     >
       <div
         style={{
