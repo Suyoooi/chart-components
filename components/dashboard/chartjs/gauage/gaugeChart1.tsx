@@ -24,7 +24,7 @@ const GaugeChart1: React.FC<GaugeChartProps> = ({ data, labels }) => {
         const { ctx, data } = chart;
 
         ctx.save();
-        console.log(chart.getDatasetMeta(0).data);
+        // console.log(chart.getDatasetMeta(0).data);
 
         const xCenter = chart.getDatasetMeta(0).data[0].x;
         const yCenter = chart.getDatasetMeta(0).data[0].y;

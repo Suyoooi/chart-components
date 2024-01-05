@@ -28,7 +28,7 @@ const GaugeChart2: React.FC<GaugeChartProps> = ({ data, labels }) => {
         } = chart;
 
         ctx.save();
-        console.log(chart.getDatasetMeta(0).data);
+        // console.log(chart.getDatasetMeta(0).data);
 
         const xCoor = chart.getDatasetMeta(0).data[0].x;
         const yCoor = chart.getDatasetMeta(0).data[0].y;

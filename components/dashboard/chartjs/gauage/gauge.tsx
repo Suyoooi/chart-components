@@ -33,9 +33,9 @@ const GaugeChart: React.FC<GaugeChartProps> = ({ data, labels }) => {
             {
               data: data,
               backgroundColor: [
+                "rgb(167, 205, 241)",
                 "rgb(174, 226, 168)",
                 "rgb(250, 208, 168)",
-                "rgb(167, 205, 241)",
               ],
               borderWidth: 1,
             },
