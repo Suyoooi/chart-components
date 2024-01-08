@@ -69,11 +69,70 @@ export const d3Data = [
 export const temporaryData = [
   { name: "Group1", year: 2020, n: 15 },
   { name: "Group1", year: 2021, n: 25 },
-  { name: "Group1", year: 2022, n: 20 },
-  { name: "Group2", year: 2020, n: 10 },
-  { name: "Group2", year: 2021, n: 18 },
+  { name: "Group1", year: 2022, n: 13 },
+  { name: "Group2", year: 2020, n: 17 },
+  { name: "Group2", year: 2021, n: 19 },
   { name: "Group2", year: 2022, n: 15 },
-  { name: "Group3", year: 2020, n: 22 },
-  { name: "Group3", year: 2021, n: 30 },
-  { name: "Group3", year: 2022, n: 28 },
+  { name: "Group3", year: 2020, n: 24 },
+  { name: "Group3", year: 2021, n: 28 },
+  { name: "Group3", year: 2022, n: 21 },
+  { name: "Group4", year: 2020, n: 11 },
+  { name: "Group4", year: 2021, n: 3 },
+  { name: "Group4", year: 2022, n: 8 },
+  { name: "Group5", year: 2020, n: 12 },
+  { name: "Group5", year: 2021, n: 30 },
+  { name: "Group5", year: 2022, n: 28 },
 ];
+
+interface DataNode {
+  name: string;
+  shortName: string;
+  size?: number | null;
+  children: DataNode[];
+}
+
+export const treemapData: DataNode = {
+  name: "Treemap Test",
+  shortName: "Test",
+  size: null,
+  children: [
+    {
+      name: "Category 1",
+      shortName: "카테고리1",
+      size: 500,
+      children: [
+        {
+          name: "왕밤빠앙",
+          shortName: "왕밤빠앙",
+          size: 59,
+          children: [],
+        },
+        {
+          name: "붕어빠앙",
+          shortName: "붕어빠앙",
+          size: 248,
+          children: [],
+        },
+      ],
+    },
+    {
+      name: "Category 2",
+      shortName: "카테고리2",
+      size: 200,
+      children: [
+        {
+          name: "계란빠앙",
+          shortName: "계란빠앙",
+          size: 92,
+          children: [],
+        },
+        {
+          name: "호두과자",
+          shortName: "호두과자",
+          size: 405,
+          children: [],
+        },
+      ],
+    },
+  ],
+};
