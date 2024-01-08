@@ -4,7 +4,7 @@ import * as d3 from "d3";
 
 const StackedBarChart: React.FC = () => {
   useEffect(() => {
-    d3.select("#viz_container").select("svg").remove();
+    d3.select("#stacked_bar").select("svg").remove();
 
     const margin = { top: 100, right: 20, bottom: 50, left: 40 };
     const width = 400 - margin.left - margin.right;
@@ -12,23 +12,19 @@ const StackedBarChart: React.FC = () => {
 
     // Sample Data
     const sampleData = [
-      { year: 2010, male: 50, female: 30 },
-      { year: 2011, male: 70, female: 40 },
-      { year: 2012, male: 90, female: 60 },
-      { year: 2013, male: 50, female: 30 },
-      { year: 2014, male: 70, female: 40 },
-      { year: 2015, male: 90, female: 60 },
+      { year: 2010, male: 40, female: -30 },
+      { year: 2011, male: 23, female: -40 },
+      { year: 2012, male: 14, female: -26 },
+      { year: 2013, male: 42, female: -30 },
+      { year: 2014, male: 20, female: -40 },
+      { year: 2015, male: 33, female: -16 },
     ];
 
     const svg = d3
-      .select("#viz_container")
+      .select("#stacked_bar")
       .append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
-      //   .attr("width", "100%")
-      //   .attr("height", "100%")
-      //   .attr("viewBox", "0 0 450 350")
-      .attr("preserveAspectRatio", "xMinYMin")
       .append("g")
       .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
@@ -39,7 +35,8 @@ const StackedBarChart: React.FC = () => {
       .stack()
       .keys(typeKeys)
       .order(d3.stackOrderNone)
-      .offset(d3.stackOffsetNone);
+      .offset(d3.stackOffsetDiverging); // 변경된 부분
+
     const stackedData = stack(sampleData);
 
     // X scale and Axis
@@ -54,12 +51,14 @@ const StackedBarChart: React.FC = () => {
       .call(d3.axisBottom(xScale).tickSize(0).tickPadding(8));
 
     const maxDataValue = d3.max(stackedData, (d: any) =>
-      d3.max(d, (e: any) => +e[1])
-    );
+      d3.max(d, (e: any) => Math.abs(+e[1]))
+    ) as number;
+
+    console.log("최댓값:::", maxDataValue);
 
     const yScale = d3
       .scaleLinear()
-      .domain([0, maxDataValue || 0])
+      .domain([-50, maxDataValue || 0] as number[])
       .range([height, 0]);
 
     svg
@@ -69,16 +68,7 @@ const StackedBarChart: React.FC = () => {
         return d.select(".domain").remove();
       });
 
-    // color palette
-    const color = d3
-      .scaleOrdinal()
-      .domain(typeKeys)
-      .range(["#8EBEFF", "#e0a9dc"]);
-
-    const GridLine = function (scale: any) {
-      return d3.axisLeft(scale);
-    };
-
+    // 격자 무늬
     svg
       .append("g")
       .attr("class", "grid")
@@ -89,7 +79,12 @@ const StackedBarChart: React.FC = () => {
           .tickFormat(null as any)
       );
 
-    // tooltip
+    // color palette
+    const color = d3
+      .scaleOrdinal()
+      .domain(typeKeys)
+      .range(["#8EBEFF", "#e0a9dc"]);
+
     const tooltip = d3
       .select("body")
       .append("div")
@@ -101,9 +96,9 @@ const StackedBarChart: React.FC = () => {
       d3.select(this).style("opacity", 0.5);
     };
     const mousemove = function (event: any, d: any) {
-      const formater = d3.format(",");
+      const formatter = d3.format(",");
       tooltip
-        .html(formater(d[1] - d[0]))
+        .html(formatter(d[1] - d[0]))
         .style("top", event.pageY - 10 + "px")
         .style("left", event.pageX + 10 + "px");
     };
@@ -124,79 +119,18 @@ const StackedBarChart: React.FC = () => {
       .data((d: any) => d)
       .join("rect")
       .attr("x", (d: any) => xScale(d.data.year) as number)
-      .attr("y", (d: any) => yScale(d[1]) as number)
+      .attr("y", (d: any) => yScale(Math.max(d[0], d[1])) as number) // 변경된 부분
       .attr("width", xScale.bandwidth() as number)
-      .attr("height", (d: any) => (yScale(d[0]) - yScale(d[1])) as number)
+      .attr(
+        "height",
+        (d: any) => Math.abs(yScale(d[0]) - yScale(d[1])) as number
+      )
       .on("mouseover", mouseover)
       .on("mousemove", mousemove)
       .on("mouseleave", mouseleave);
-
-    // // title
-    // svg
-    //   .append("text")
-    //   .attr("class", "chart-title")
-    //   .attr("x", -margin.left * 0.6)
-    //   .attr("y", -margin.top / 1.5)
-    //   .attr("text-anchor", "start")
-    //   .text("Resettlement by UNHCR and others | 2010-2020");
-
-    // // Y axis label
-    // svg
-    //   .append("text")
-    //   .attr("class", "chart-label")
-    //   .attr("x", -margin.left * 0.6)
-    //   .attr("y", -(margin.top / 8))
-    //   .attr("text-anchor", "start")
-    //   .text("Number of people (thousands)");
-
-    // // source
-    // svg
-    //   .append("text")
-    //   .attr("class", "chart-source")
-    //   .attr("x", -margin.left * 0.6)
-    //   .attr("y", height + margin.bottom * 0.7)
-    //   .attr("text-anchor", "start")
-    //   .text("Source: UNHCR Refugee Data Finder");
-
-    // // copyright
-    // svg
-    //   .append("text")
-    //   .attr("class", "copyright")
-    //   .attr("x", -margin.left * 0.6)
-    //   .attr("y", height + margin.bottom * 0.9)
-    //   .attr("text-anchor", "start")
-    //   .text("©UNHCR, The UN Refugee Agency");
-
-    // legend
-    svg
-      .append("rect")
-      .attr("x", -margin.left * 0.6)
-      .attr("y", -(margin.top / 2))
-      .attr("width", 15)
-      .attr("height", 15)
-      .style("fill", "#8EBEFF");
-    svg
-      .append("text")
-      .attr("class", "legend")
-      .attr("x", -margin.left * 0.6 + 20)
-      .attr("y", -(margin.top / 2.5))
-      .text("UNHCR resettlement");
-    svg
-      .append("rect")
-      .attr("x", 130)
-      .attr("y", -(margin.top / 2))
-      .attr("width", 15)
-      .attr("height", 15)
-      .style("fill", "#e0a9dc");
-    svg
-      .append("text")
-      .attr("class", "legend")
-      .attr("x", 150)
-      .attr("y", -(margin.top / 2.5))
-      .text("Other resettlement");
   }, []);
 
-  return <div id="viz_container" />;
+  return <div id="stacked_bar" />;
 };
 
 export default StackedBarChart;
