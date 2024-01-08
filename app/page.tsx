@@ -1,15 +1,12 @@
 import Area from "@/components/dashboard/chartjs/area/area";
 import AreaZoom from "@/components/dashboard/chartjs/area/areaZoom";
 import Bar from "@/components/dashboard/chartjs/bar/bar";
-import BarBoth from "@/components/dashboard/chartjs/bar/barBoth";
 import HorizontalBar from "@/components/dashboard/chartjs/bar/horizontalBar";
-import StackedBar from "@/components/dashboard/chartjs/bar/stackedBar";
 import StackedBar2 from "@/components/dashboard/chartjs/bar/stackedBar2";
 import Donut from "@/components/dashboard/chartjs/donut/donut";
 import HalfDonut from "@/components/dashboard/chartjs/donut/halfDonut";
 import Gauge from "@/components/dashboard/chartjs/gauage/gauge";
 import GaugeChart1 from "@/components/dashboard/chartjs/gauage/gaugeChart1";
-import GaugeChart from "@/components/dashboard/chartjs/gauage/gaugeChart1";
 import GaugeChart2 from "@/components/dashboard/chartjs/gauage/gaugeChart2";
 import Line from "@/components/dashboard/chartjs/line/line";
 import LineAddData from "@/components/dashboard/chartjs/line/lineAddData";
@@ -20,102 +17,50 @@ import BarChart from "@/components/dashboard/d3/bar/bar";
 import HorizontalBarChart from "@/components/dashboard/d3/bar/horizontalBar";
 import LineChart from "@/components/dashboard/d3/line/line";
 import MultiLineChart from "@/components/dashboard/d3/line/multiLine";
-
-interface TreemapDataset {
-  label: string;
-  key: string;
-  groups: string[];
-  fontColor: string;
-  fontSize: number;
-  fontWeight: string;
-  tree: any[];
-  spacing: number;
-  borderWidth: number;
-  borderColor: string;
-}
+import AgGrid from "@/components/grid/agGrid/agGrid1";
+import AgGrid2 from "@/components/grid/agGrid/agGrid2";
+import Tabulator1 from "@/components/grid/tabulator/tabulator1";
+import {
+  areaChartData,
+  areaZoomChartData,
+  areaZoomLabels,
+  barChartData,
+  d3Data,
+  doughnutChartData,
+  gauageChartData,
+  gauageChartData2,
+  gaugeLabels,
+  gaugeLabels2,
+  horizontalBarChartData,
+  labels,
+  lineChartData,
+  multiLineChartData,
+  temporaryData,
+  treemapDataset,
+} from "@/data/chartData";
 
 export default function Home() {
-  const labels = ["Label 1", "Label 2", "Label 3", "Label 4", "Label 5"];
-  const areaZoomLabels = ["A", "B", "C", "D", "E", "F", "G", "H"];
-  const gaugeLabels = ["Level.1", "Level.2", "Level.3"];
-  const gaugeLabels2 = ["Level.1", "Level.2"];
-
-  const lineChartData = [10, 20, 15, 25, 18];
-  const multiLineChartData = [
-    [10, 20, 15, 5, 18],
-    [15, 20, 10, 24, 22],
-    [17, 33, 1, 14, 12],
-  ];
-  const barChartData = [15, 25, -18, 30, 22];
-  const horizontalBarChartData = [15, 25, 18, -6, 22];
-  const doughnutChartData = [30, 20, 10, 25, 15];
-  const areaChartData = [10, -13, 3, 25, -15];
-  const areaZoomChartData = [10, -13, 3, 25, -15, 32, -23, 3];
-  const gauageChartData = [200, 400, 700];
-  const gauageChartData2 = [700, 200];
-
-  const legend = ["up", "down"];
-
-  const treemapDataset: TreemapDataset = {
-    label: "treemap",
-    key: "price",
-    groups: ["displayValue"],
-    fontColor: "grey",
-    fontSize: 16,
-    fontWeight: "bold",
-    tree: [
-      { price: 100, name: "BTC" },
-      { price: 20, name: "ETX" },
-      { price: 6, name: "XRP" },
-      { price: 6, name: "DGE" },
-      { price: 0.4, name: "TRD" },
-      { price: 40, name: "TVD" },
-      { price: 10, name: "FRO" },
-      { price: 10, name: "GEO" },
-      { price: 63, name: "ABC" },
-    ].map((item) => {
-      const { name, price } = item;
-      const displayValue = `Subtheme: ${name} ${price}`;
-      return { ...item, displayValue };
-    }),
-    spacing: 0.1,
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.5)",
-  };
-
-  const chartWidth = 400;
-  const chartHeight = 200;
-
-  const d3Data = [
-    { Country: "A", Value: 50 },
-    { Country: "B", Value: 80 },
-    { Country: "C", Value: 120 },
-    { Country: "D", Value: 10 },
-    { Country: "E", Value: 150 },
-    // { Country: "F", Value: -2000 },
+  const columns = [
+    { title: "Name", field: "name", width: 150 },
+    { title: "Age", field: "age", align: "left" },
+    { title: "Country", field: "country", align: "left" },
   ];
 
-  const lineData = [
-    { date: new Date("2020-01-01"), value: 15 },
-    { date: new Date("2020-02-01"), value: 25 },
-    { date: new Date("2020-03-01"), value: 20 },
-  ];
-
-  const temporaryData = [
-    { name: "Group1", year: 2020, n: 15 },
-    { name: "Group1", year: 2021, n: 25 },
-    { name: "Group1", year: 2022, n: 20 },
-    { name: "Group2", year: 2020, n: 10 },
-    { name: "Group2", year: 2021, n: 18 },
-    { name: "Group2", year: 2022, n: 15 },
-    { name: "Group3", year: 2020, n: 22 },
-    { name: "Group3", year: 2021, n: 30 },
-    { name: "Group3", year: 2022, n: 28 },
+  const data = [
+    { name: "수연", age: 30, country: "한국" },
+    { name: "붕어빵", age: 25, country: "한국" },
+    { name: "계란빵", age: 40, country: "UK" },
+    { name: "John Doe", age: 30, country: "USA" },
+    { name: "호두과자", age: 67, country: "한국" },
+    { name: "Jane Doe", age: 24, country: "Canada" },
+    { name: "호두과자", age: 24, country: "한국" },
+    { name: "옥수수빵", age: 51, country: "한국" },
+    { name: "Bob Smith", age: 40, country: "UK" },
   ];
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-red-100">
-      <div style={{ fontSize: 30, fontWeight: 700 }} className="mb-20">
+      <div style={{ fontSize: 30, fontWeight: 700 }} className="mb-10">
         Chart.js
       </div>
       <div className="flex flex-row">
@@ -191,6 +136,25 @@ export default function Home() {
         </div>
         <div>
           <BarChart data={d3Data} />
+        </div>
+      </div>
+      <div style={{ fontSize: 30, fontWeight: 700 }} className="mb-10 mt-20">
+        Tabulator
+      </div>
+      <div className="flex flex-row">
+        <div>
+          <Tabulator1 columns={columns} data={data} />
+        </div>
+      </div>
+      <div style={{ fontSize: 30, fontWeight: 700 }} className="mb-10 mt-20">
+        ag-grid
+      </div>
+      <div className="flex flex-row mt-12">
+        <div>
+          <AgGrid />
+        </div>
+        <div>
+          <AgGrid2 />
         </div>
       </div>
     </main>
