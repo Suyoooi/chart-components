@@ -21,10 +21,12 @@ const GaugeChart: React.FC<GaugeChartProps> = ({ value }) => {
     const height = 200;
     const radius = Math.min(width, height) / 2;
 
+    // 기존 차트 지우기
+    d3.select(gaugeRef.current).selectAll("*").remove();
+
     const colorScale = d3
       .scaleLinear<string>()
-      // 색상이 변하는 기준을 여기서 정해야함
-      // 일단 100을 최댓값으로 지정함
+      // 차트 기준 및 색상
       .domain([0, 50, 100])
       .range(["green", "yellow", "red"]);
 
@@ -39,7 +41,6 @@ const GaugeChart: React.FC<GaugeChartProps> = ({ value }) => {
       .attr("width", width)
       .attr("height", height)
       .append("g")
-      // 여기서 게이지 차트 방향 조정
       .attr("transform", `translate(${width / 2},${height / 2}) rotate(-90)`);
 
     // 게이지 범위 표시
@@ -52,6 +53,16 @@ const GaugeChart: React.FC<GaugeChartProps> = ({ value }) => {
       .style("fill", "black")
       .attr("transform", `rotate(-90)`)
       .text("0");
+
+    svg
+      .append("text")
+      .attr("x", 0)
+      .attr("y", 15)
+      .attr("text-anchor", "middle")
+      .style("font-size", "12px")
+      .attr("transform", `rotate(90)`)
+      .style("fill", "black")
+      .text("50");
 
     svg
       .append("text")
