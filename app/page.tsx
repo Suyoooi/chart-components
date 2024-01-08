@@ -5,9 +5,9 @@ import HorizontalBar from "@/components/dashboard/chartjs/bar/horizontalBar";
 import StackedBar2 from "@/components/dashboard/chartjs/bar/stackedBar2";
 import Donut from "@/components/dashboard/chartjs/donut/donut";
 import HalfDonut from "@/components/dashboard/chartjs/donut/halfDonut";
-import Gauge from "@/components/dashboard/chartjs/gauage/gauge";
-import GaugeChart1 from "@/components/dashboard/chartjs/gauage/gaugeChart1";
-import GaugeChart2 from "@/components/dashboard/chartjs/gauage/gaugeChart2";
+import Gauge from "@/components/dashboard/chartjs/gauge/gauge";
+import GaugeChart1 from "@/components/dashboard/chartjs/gauge/gaugeChart1";
+import GaugeChart2 from "@/components/dashboard/chartjs/gauge/gaugeChart2";
 import Line from "@/components/dashboard/chartjs/line/line";
 import LineAddData from "@/components/dashboard/chartjs/line/lineAddData";
 import MultiLine from "@/components/dashboard/chartjs/line/multiLine";
@@ -15,8 +15,11 @@ import Treemap from "@/components/dashboard/chartjs/treemap/treemap";
 import BarChart from "@/components/dashboard/d3/bar/bar";
 
 import HorizontalBarChart from "@/components/dashboard/d3/bar/horizontalBar";
+import GaugeChart from "@/components/dashboard/d3/gauge/gauge";
+import GaugeTest from "@/components/dashboard/d3/gauge/gaugeTest";
 import LineChart from "@/components/dashboard/d3/line/line";
 import MultiLineChart from "@/components/dashboard/d3/line/multiLine";
+import TreemapChart from "@/components/dashboard/d3/treemap/treemap";
 import AgGrid from "@/components/grid/agGrid/agGrid1";
 import AgGrid2 from "@/components/grid/agGrid/agGrid2";
 import Tabulator1 from "@/components/grid/tabulator/tabulator1";
@@ -36,6 +39,7 @@ import {
   lineChartData,
   multiLineChartData,
   temporaryData,
+  treemapData,
   treemapDataset,
 } from "@/data/chartData";
 
@@ -136,6 +140,14 @@ export default function Home() {
         </div>
         <div>
           <BarChart data={d3Data} />
+        </div>
+      </div>
+      <div className="flex flex-row gap-10">
+        <div>
+          <TreemapChart data={treemapData} />
+        </div>
+        <div>
+          <GaugeTest />
         </div>
       </div>
       <div style={{ fontSize: 30, fontWeight: 700 }} className="mb-10 mt-20">
