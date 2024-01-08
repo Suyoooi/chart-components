@@ -149,7 +149,7 @@ export default function Home() {
       <div style={{ fontSize: 30, fontWeight: 700 }} className="mb-10 mt-20">
         ag-grid
       </div>
-      <div className="flex flex-row mt-12">
+      <div className="flex flex-row mt-12 gap-3">
         <div>
           <AgGrid />
         </div>
