@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/tabulator": "^0.1.2",
+    "@types/tabulator-tables": "^5.5.4",
     "chart.js": "^4.4.1",
     "chartjs-chart-treemap": "^2.3.0",
     "chartjs-gauge": "^0.3.0",
@@ -16,7 +18,9 @@
     "d3": "^7.8.5",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "tabulator": "^0.2.40",
+    "tabulator-tables": "^5.5.2"
   },
   "devDependencies": {
     "@types/chart.js": "^2.9.41",
