@@ -80,7 +80,7 @@ const LineChart: React.FC<LineChartProps> = ({ data }) => {
 
   return (
     <div id="my_dataviz">
-      <svg ref={chartRef} width={460} height={400} />
+      <svg ref={chartRef} width={460} height={300} />
     </div>
   );
 };

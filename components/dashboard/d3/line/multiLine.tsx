@@ -31,16 +31,13 @@ const MultiLineChart: React.FC<LineChartProps> = ({ data }) => {
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // Parse the data
     data.forEach((d) => {
       d.year = +d.year;
       d.n = +d.n;
     });
 
-    // group the data: I want to draw one line per group
     const sumstat = d3.group(data, (d) => d.name);
 
-    // Add X axis --> it is a date format
     const x = d3
       .scaleLinear()
       .domain(d3.extent(data, (d) => d.year) as [number, number])
@@ -75,7 +72,7 @@ const MultiLineChart: React.FC<LineChartProps> = ({ data }) => {
         "#999999",
       ]);
 
-    // Draw the line
+    // line
     svg
       .selectAll(".line")
       .data(sumstat)
