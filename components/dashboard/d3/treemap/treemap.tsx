@@ -5,8 +5,7 @@ import { hierarchy, treemap } from "d3-hierarchy";
 import { scaleOrdinal, scaleLinear } from "d3-scale";
 import { max, min, mean } from "d3-array";
 import { schemeTableau10, schemeSet3 } from "d3-scale-chromatic";
-import jsonData from "../../../../data/stackedBar.json";
-import { interpolateRgb } from "d3-interpolate";
+import jsonData from "../../../../data/treemap.json";
 
 interface DataNode {
   data: any;
