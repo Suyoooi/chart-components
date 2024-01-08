@@ -15,6 +15,7 @@ import Treemap from "@/components/dashboard/chartjs/treemap/treemap";
 import BarChart from "@/components/dashboard/d3/bar/bar";
 
 import HorizontalBarChart from "@/components/dashboard/d3/bar/horizontalBar";
+import StackedBarChart from "@/components/dashboard/d3/bar/stackedBar";
 import GaugeChart from "@/components/dashboard/d3/gauge/gauge";
 import GaugeTest from "@/components/dashboard/d3/gauge/gaugeTest";
 import LineChart from "@/components/dashboard/d3/line/line";
@@ -60,6 +61,33 @@ export default function Home() {
     { name: "호두과자", age: 24, country: "한국" },
     { name: "옥수수빵", age: 51, country: "한국" },
     { name: "Bob Smith", age: 40, country: "UK" },
+  ];
+
+  const sampleData = [
+    {
+      category: "Category A",
+      values: [
+        { name: "Item 1", value: 10 },
+        { name: "Item 2", value: 20 },
+        { name: "Item 3", value: 30 },
+      ],
+    },
+    {
+      category: "Category B",
+      values: [
+        { name: "Item 1", value: 15 },
+        { name: "Item 2", value: 25 },
+        { name: "Item 3", value: 35 },
+      ],
+    },
+    {
+      category: "Category C",
+      values: [
+        { name: "Item 1", value: 8 },
+        { name: "Item 2", value: 18 },
+        { name: "Item 3", value: 28 },
+      ],
+    },
   ];
 
   return (
@@ -144,10 +172,15 @@ export default function Home() {
       </div>
       <div className="flex flex-row gap-10">
         <div>
-          <TreemapChart data={treemapData} />
+          <StackedBarChart />
         </div>
         <div>
           <GaugeTest />
+        </div>
+      </div>
+      <div className="flex flex-row gap-10">
+        <div>
+          <TreemapChart />
         </div>
       </div>
       <div style={{ fontSize: 30, fontWeight: 700 }} className="mb-10 mt-20">
