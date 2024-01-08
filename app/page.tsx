@@ -19,6 +19,7 @@ import BarChart from "@/components/dashboard/d3/bar/bar";
 
 import HorizontalBarChart from "@/components/dashboard/d3/bar/horizontalBar";
 import LineChart from "@/components/dashboard/d3/line/line";
+import MultiLineChart from "@/components/dashboard/d3/line/multiLine";
 
 interface TreemapDataset {
   label: string;
@@ -94,6 +95,24 @@ export default function Home() {
     // { Country: "F", Value: -2000 },
   ];
 
+  const lineData = [
+    { date: new Date("2020-01-01"), value: 15 },
+    { date: new Date("2020-02-01"), value: 25 },
+    { date: new Date("2020-03-01"), value: 20 },
+  ];
+
+  const temporaryData = [
+    { name: "Group1", year: 2020, n: 15 },
+    { name: "Group1", year: 2021, n: 25 },
+    { name: "Group1", year: 2022, n: 20 },
+    { name: "Group2", year: 2020, n: 10 },
+    { name: "Group2", year: 2021, n: 18 },
+    { name: "Group2", year: 2022, n: 15 },
+    { name: "Group3", year: 2020, n: 22 },
+    { name: "Group3", year: 2021, n: 30 },
+    { name: "Group3", year: 2022, n: 28 },
+  ];
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-red-100">
       <div style={{ fontSize: 30, fontWeight: 700 }} className="mb-20">
@@ -160,23 +179,18 @@ export default function Home() {
       </div>
       <div className="flex flex-row">
         <div>
-          <LineChart
-            data={lineChartData}
-            width={chartWidth}
-            height={chartHeight}
-          />
+          <LineChart data={d3Data} />
         </div>
+        <div>
+          <MultiLineChart data={temporaryData} />
+        </div>
+      </div>
+      <div className="flex flex-row mt-12">
         <div>
           <HorizontalBarChart data={d3Data} />
         </div>
         <div>
           <BarChart data={d3Data} />
-        </div>
-      </div>
-      <div className="flex flex-row mt-12"></div>
-      <div className="flex flex-row mt-12">
-        <div>
-          <HorizontalBar data={horizontalBarChartData} labels={labels} />
         </div>
       </div>
     </main>
